@@ -1,0 +1,9 @@
+KLONE to-do-list
+
+Carolyn: 
+
+Verify the group specific storage allocation (Merlab shared home directory) with Nam
+Learn how to request just the resources needed for each job in the sbatch command 
+Finish turning Nam's presenatation into a useful document for the lab
+Ask Nam if he can transfer installed programs Klone for us when we move
+Ask Nam if he can help us install the programs we need on Klone
