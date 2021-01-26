@@ -1,6 +1,11 @@
 KLONE to-do-list
+<<<<<<< HEAD
 
 Natalie: 
+=======
+Hi babes! - Eleni likes baba au rum
+Carolyn: 
+>>>>>>> origin/main
 
 Verify the group specific storage allocation (Merlab shared home directory) with Nam
 Learn how to request just the resources needed for each job in the sbatch command 
