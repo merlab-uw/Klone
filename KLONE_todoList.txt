@@ -9,10 +9,12 @@ Ask Nam if he can transfer installed programs Klone for us when we move
 Ask Nam if he can help us install the programs we need on Klone
 
 
-Specifics for the meeting with David Friday: 
+Carolyn cont'd; Specifics for the meeting with David Friday: 
 
 1. have a blank sbatch script ready for him
 2. make a list of questions to ask about what he wants to do
 3. make sure his data is up with rsync
 4. build his directory structure on Hyak
 5. make a list of common commands he will need 
+
+Hi friends! We're so good at learning Git! 
