@@ -14,16 +14,16 @@ You will learn how to:
 
 ## Step 1. Transfer a vcf file to Klone from your local computer
 
-First we need to transfer some data to Klone, so we can manipulate it. In this example, we will transfer a vcf file called *herring.vcf* to a directory on Klone.
-
-Let's open a UNIX terminal on our local computer and transfer the vcf file to Klone using the secure copy command (scp).
+Let's transfer some data to Klone, so we can manipulate it. In this example, we will transfer the vcf file [herring.vcf](herring.vcf) to a directory on Klone.
+First, save [herring.vcf](herring.vcf) to a folder on your local computer.
+Then, open a UNIX terminal and transfer the vcf file to Klone using the secure copy command (scp).
 
 ``` bash
 
 # scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
 # First, specify the directories and file names as arguments 
 
-DIR1=/mnt/hgfs/D # where the file is located on my local computer
+DIR1=/mnt/hgfs/D # where the vcf file is saved on my local computer
 FILE=herring.vcf # the name of file to be copied
 DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # where I want the file to go on Klone
 
