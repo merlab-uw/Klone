@@ -4,12 +4,16 @@ To watch an online lecture that introduces singularities and software containers
 
 This tutorial will show you how to download and use the bioinformatics program [VCFtools](https://vcftools.github.io/man_latest.html) as a singularity on Klone.
 
-You will learn how to transfer a vcf file containing genotype data from your local computer, filter the vcf file using *VCFtools*, and copy the filtered vcf back to your local computer.  In the process, you will also learn how to download and use a singularity containing the software *VCFtools* from the website Singularity Hub.
+You will learn how to:
+
+1. Transfer a vcf file containing genotype data from your local computer
+2. Download and use a singularity containing the software *VCFtools* from the website *Singularity Hub*
+3. Filter the vcf file using the *VCFtools*, and copy the filtered vcf back to your local computer.
 
 ## Step 1. Transfer a vcf file to klone from your local computer
 
 ```
-# Open a UNIX terminal and log into klone using secure shell (ssh) and your UW netID. Here is how I (elpetrou) do this:
+# Open a UNIX terminal and log into klone using secure shell (ssh). You will need your UW netID, UW password, and DUO two-factor authentication. Here is how I (elpetrou) do this:
 
 ssh elpetrou@klone.hyak.uw.edu
 
@@ -18,7 +22,7 @@ ssh elpetrou@klone.hyak.uw.edu
 # Specify the directories and file names as arguments 
 
 DIR1=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered #where the file lives on my local computer
-FILE=0002.filt.HWE.tidy.snpid.recode.vcf #the file to be copied
+FILE=herring.vcf #the file to be copied
 DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou #where I want the file to go on Klone
 
 # Copy the files to Klone with scp
@@ -50,11 +54,11 @@ module load singularity
 singularity pull shub://TomHarrop/singularity-containers:vcftools_0.1.16
 
 ```
-Congratulations! You have downloaded the *VCFtools* singularity to Klone. 
+Congratulations! You have downloaded the *VCFtools* singularity to Klone. You have saved it to the directory /gscratch/merlab/singularity_sif and it has this file name: singularity-containers_vcftools_0.1.16.sif
 
 ## Step 3. Use the VCFTools singularity
 
-To use the singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). For example, my directory is:
+To use the singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). For example, my directory is /gscratch/merlab/elpetrou, so this is how I nanavigate to it:
 
 ```
 cd /gscratch/merlab/elpetrou
@@ -64,6 +68,14 @@ Using the *sinfo* command, take a peek at what partitions and compute nodes are 
 ```
 sinfo
 ```
+You will see something like:
+
+[elpetrou@klone-login01 singularity_sif]$ sinfo
+PARTITION       AVAIL  TIMELIMIT  NODES  STATE NODELIST 
+compute-hugemem    up   infinite     16   idle n[3000-3007,3016-3021,3065,3067]
+
+
+
 If there are free compute nodes, submit a request for an interactive session on one of them.
 This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), while the -A argument is our group's name (merlab) on Klone.
 
@@ -101,7 +113,7 @@ You will use the vcftools --indv command to specify the names of individuals you
 
 ```
 MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # name of singularity that I want to use
-MY_FOLDER=/gscratch/merlab/elpetrou # path to folder where I have saved the vcf file
+MY_DIR=/gscratch/merlab/elpetrou # path to directory where I have saved the vcf file
 IN_VCF=herring.vcf # name of input vcf file
 OUT_VCF=herring.filt # base name of output vcf (without .vcf file extendion)
 
@@ -109,10 +121,10 @@ cd $MY_FOLDER
 
 singularity exec \
 $MY_SINGULARITY \
-vcftools --vcf $MY_FOLDER'/'$IN_VCF \
+vcftools --vcf $MY_DIR'/'$IN_VCF \
 --indv 2B_13 \ # name of individual to keep in vcf file
 --recode --recode-INFO-all \
---out $MY_FOLDER'/'$OUT_VCF
+--out $MY_DIR'/'$OUT_VCF
 
 ```
 
