@@ -1,6 +1,8 @@
-# Notes about using software stored in singularities on Klone
+# Notes about using singularities on Klone
 
-To watch an online lecture that introduces singularities and software containers for high-powered computing, [see this YouTube video](https://www.youtube.com/watch?v=vEjLuX0ClN0&t=1276s)
+Sometimes scientists need to package up all of the software needed for their research, and deliver this package to a second scientist so that they can reproduce the work. In High Performance Computing (HPC), this package is known as a software container or a singularity. Singularities are neat because they allow us to easily install bioinformatics software on the Klone supercomputer.
+
+- To watch an online lecture that introduces singularities and software containers for HPC, [see this YouTube video](https://www.youtube.com/watch?v=vEjLuX0ClN0&t=1276s)
 
 This tutorial will show you how to download and use the bioinformatics program [VCFtools](https://vcftools.github.io/man_latest.html) as a singularity on Klone.
 
@@ -10,9 +12,12 @@ You will learn how to:
 2. Download and use a singularity containing the software *VCFtools* from the website *Singularity Hub*
 3. Filter the vcf file using the *VCFtools*, and copy the filtered vcf back to your local computer.
 
-## Step 1. Transfer a vcf file to klone from your local computer
+## Step 1. Transfer a vcf file to Klone from your local computer
 
-```
+First we need to transfer some data to Klone, so we can manipulate it. In this example, I transfer a vcf file containing genotypes.
+
+``` bash
+
 # Open a UNIX terminal and log into klone using secure shell (ssh). You will need your UW netID, UW password, and DUO two-factor authentication. Here is how I (elpetrou) do this:
 
 ssh elpetrou@klone.hyak.uw.edu
@@ -32,13 +37,12 @@ $DIR2
 
 ```
 
-## Step 2. Download an existing singularity from *Singularity Hub* 
+## Step 2. Download a singularity from *Singularity Hub* 
 
-[Singularity Hub](https://singularity-hub.org/) is a website that contains ready-made singularities with commonly used bioinformatics software that you can download.
+Next, we will download a singularity containing the software VCFtools from [Singularity Hub](https://singularity-hub.org/). This is a website that contains many singularities with commonly used bioinformatics software.
 
-To learn more about Singularity Hub, [read this manual](https://singularityhub.github.io/singularityhub-docs/#pancakes-getting-started)
-
-Nota Bene: To search for and download singularities from Singularity Hub, you will need to sign in to Singularity Hub using your GitHub account.
+ - To learn more about Singularity Hub, [read this manual](https://singularityhub.github.io/singularityhub-docs/#pancakes-getting-started)
+ - Nota Bene: To search for and download singularities from Singularity Hub, you will need to sign in to Singularity Hub using your GitHub account.
 
 In this example, we will download VCFTools from Singularity Hub from a user named TomHarrop. To do this, we will use the *singularity pull* command, and the singularity's Uniform Resource Identifier (URI): TomHarrop/singularity-containers:vcftools_0.1.16
 
@@ -54,7 +58,9 @@ module load singularity
 singularity pull shub://TomHarrop/singularity-containers:vcftools_0.1.16
 
 ```
-Congratulations! You have downloaded the *VCFtools* singularity to Klone. You have saved it to the directory /gscratch/merlab/singularity_sif and it has this file name: singularity-containers_vcftools_0.1.16.sif
+Congratulations! You have downloaded the *VCFtools* singularity to Klone. It is saved to the directory /gscratch/merlab/singularity_sif and it has this file name:
+  
+  singularity-containers_vcftools_0.1.16.sif
 
 ## Step 3. Use the VCFTools singularity
 
