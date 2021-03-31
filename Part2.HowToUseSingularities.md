@@ -159,7 +159,8 @@ If you type ls you will see that there is a file called *herring.filt.recode.vcf
  
 Open up a new terminal in your local computer and type something like this:
 
-```
+``` bash
+
 # Specify directories and file names
 DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # Path to directory on Klone containing the files to be copied
 FILE=herring.filt.recode.vcf # name of file to be copied
