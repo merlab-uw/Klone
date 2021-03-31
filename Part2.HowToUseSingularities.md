@@ -28,7 +28,7 @@ ssh elpetrou@klone.hyak.uw.edu
 # scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
 # First, specify the directories and file names as arguments 
 
-DIR1=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered #where the file lives on my local computer
+DIR1=/mnt/hgfs/D #where the file lives on my local computer
 FILE=herring.vcf #the file to be copied
 DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou #where I want the file to go on Klone
 
@@ -129,12 +129,12 @@ MY_DIR=/gscratch/merlab/elpetrou # path to directory where I have saved the vcf 
 IN_VCF=herring.vcf # name of input vcf file
 OUT_VCF=herring.filt # base name of output vcf (without .vcf file extendion)
 
-cd $MY_FOLDER
+KEEP_INDIV=Case07_001 # name of individual sample to keep in vcf file
 
 singularity exec \
 $MY_SINGULARITY \
 vcftools --vcf $MY_DIR'/'$IN_VCF \
---indv 2B_13 \ # name of individual to keep in vcf file
+--indv $KEEP_INDIV \ 
 --recode --recode-INFO-all \
 --out $MY_DIR'/'$OUT_VCF
 
@@ -149,7 +149,7 @@ Nota Bene: you have to type these commands into a terminal on your local compute
 
 DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # Path to directory containing the files to be copied
 FILE=herring.filt.vcf # file to be copied
-DIR2=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered # Path to target directory
+DIR2=/mnt/hgfs/D # Path to target directory
 
 # Move file from supercomputer to local computer:
 scp $DIR1'/'$FILE \
