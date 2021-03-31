@@ -2,7 +2,7 @@
 
 ## Background information on the node
 
-The MerLab has purchased a dedicated node on Klone, the latest of UW's HPCC systems. The other two are Hyak and Mox. All three systems are independent of each other.
+The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two are Hyak and Mox. All three systems are independent of each other.
 
 These are the specifications of our node:
 
