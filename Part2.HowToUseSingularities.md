@@ -18,13 +18,15 @@ First we need to transfer some data to Klone, so we can manipulate it. In this e
 
 ``` bash
 
-# Open a UNIX terminal and log into klone using secure shell (ssh). You will need your UW netID, UW password, and DUO two-factor authentication. Here is how I (elpetrou) do this:
+# Open a UNIX terminal and log into klone using secure shell (ssh). 
+# To do this, you will need your UW netID, UW password, and DUO two-factor authentication. 
+# Here is how I (elpetrou) do this:
 
 ssh elpetrou@klone.hyak.uw.edu
 
-# Transfer a vcf file to Klone using the secure copy command (scp). scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
-
-# Specify the directories and file names as arguments 
+# Transfer a vcf file to Klone using the secure copy command (scp). 
+# scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
+# First, specify the directories and file names as arguments 
 
 DIR1=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered #where the file lives on my local computer
 FILE=herring.vcf #the file to be copied
@@ -64,7 +66,8 @@ Congratulations! You have downloaded the *VCFtools* singularity to Klone. It is 
 
 ## Step 3. Use the VCFTools singularity
 
-To use the singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). For example, my directory is /gscratch/merlab/elpetrou, so this is how I nanavigate to it:
+To use the singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). 
+For example, my directory is /gscratch/merlab/elpetrou, so this is how I nanavigate to it:
 
 ```
 cd /gscratch/merlab/elpetrou
@@ -76,14 +79,15 @@ sinfo
 ```
 You will see something like:
 
-[elpetrou@klone-login01 singularity_sif]$ sinfo
-PARTITION       AVAIL  TIMELIMIT  NODES  STATE NODELIST 
-compute-hugemem    up   infinite     16   idle n[3000-3007,3016-3021,3065,3067]
+| PARTITION                  |        AVAIL         | TIMELIMIT                     | NODES                 | STATE               | NODELIST          |
+|:---------------------------|:--------------------:|:-------------------------------:|:-------------------:||:-------------------:||:-------------------:|
+| compute-hugemem            | up                   | infinite                       | 16                   |idle               | n[3000-3007,3016-3021,3065,3067]|
 
 
 
 If there are free compute nodes, submit a request for an interactive session on one of them.
-This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), while the -A argument is our group's name (merlab) on Klone.
+This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), 
+while the -A argument is our group's name (merlab) on Klone.
 
 ```
 srun -p compute-hugemem -A merlab --nodes=1 \
