@@ -64,9 +64,9 @@ Congratulations! You have downloaded the *VCFtools* singularity to Klone. It is 
   
   singularity-containers_vcftools_0.1.16.sif
 
-## Step 3. Use the VCFTools singularity
+## Step 3. Use the VCFtools singularity
 
-To use the singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). 
+To use the VCFtools singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). 
 For example, my directory is /gscratch/merlab/elpetrou, so this is how I nanavigate to it:
 
 ```
@@ -102,7 +102,7 @@ Next, load the singularity module  so you can use the VCFtools singularity that 
 ```
 module load singularity
 ```
-### Exercise #1: Using the VCFTools singularity, have VCFTools print its version to the terminal
+### Exercise #1: Using the VCFtools singularity, have VCFtools print its version to the terminal
 
 The exec Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system
 USAGE: singularity [...] exec [exec options...] <container path> <command>
@@ -116,14 +116,12 @@ $MY_SINGULARITY \
 vcftools --version 
 
 ```
-In the terminal, you should see this :
+In the terminal, you should see this: VCFtools (0.1.16). Yay! You are using VCFtools on Klone!
 
 
-### Exercise #2: Using the VCFTools singularity, filter & retain a small number of individuals in your vcf file
+### Exercise #2: Using the VCFTools singularity, filter & retain one individual in your vcf file
 
-This exercise demonstrates how to call VCFTools commands from the VCFTools singularity.
-
-You will use the vcftools --indv command to specify the names of individuals you want to retain in vcf file
+This exercise demonstrates how to use VCFtools as a singularity. We will use the vcftools --indv command to specify one sample that we want to retain in vcf file.
 
 ```
 MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # name of singularity that I want to use
@@ -144,7 +142,7 @@ vcftools --vcf $MY_DIR'/'$IN_VCF \
 
 ## Step 4. Transfer files back to local computer from klone using the secure copy command (scp)
  
-Nota Bene: you have to type these commands into a terminal on your local computer and NOT in a Klone terminal
+Nota Bene: you have to type these commands into a terminal on your local computer and NOT in a Klone terminal. So open up a new terminal and type:
 
 ```
 # Specify directories and file names
