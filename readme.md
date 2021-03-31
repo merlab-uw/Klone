@@ -1,3 +1,5 @@
 ## MERLab node on Klone
 
-Getting our repo together for documentation, problem solving, sharing tutorials related to our Klone node.
+This repository contains useful information and tutorials related to MERlabs's node on the UW Supercomputer (Klone).
+This information is stored as Markdown files (ending in .md).
+
