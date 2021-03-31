@@ -134,20 +134,26 @@ We will use the vcftools --indv command to specify one sample that we want to re
 
 ``` bash
 
+# Specify the directory and file names
 MYSINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # name of singularity that I want to use
 MYDIR=/gscratch/merlab/elpetrou # path to directory where I have saved the vcf file
 INVCF=herring.vcf # name of input vcf file
 OUTVCF=herring.filt # base name of output vcf (without .vcf file extendion)
 KEEPINDIV=Case07_001 # name of individual sample to keep in vcf file
 
+# Go into directory with your vcf file
+cd $MYDIR
+
+# Run VCFtools
 singularity exec \
 $MYSINGULARITY \
-vcftools --vcf $MYDIR'/'$INVCF \
+vcftools --vcf $INVCF \
 --indv $KEEPINDIV \
 --recode --recode-INFO-all \
---out $MYDIR'/'$OUTVCF
+--out $OUTVCF
 
 ```
+If you type ls you will see that there is a file called *herring.filt.recode.vcf* in your folder!
 
 ## Step 4. Transfer files back to local computer from klone using the secure copy command (scp)
  
@@ -155,9 +161,8 @@ Open up a new terminal in your local computer and type something like this:
 
 ```
 # Specify directories and file names
-
 DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # Path to directory on Klone containing the files to be copied
-FILE=herring.filt.vcf # name of file to be copied
+FILE=herring.filt.recode.vcf # name of file to be copied
 DIR2=/mnt/hgfs/D # Path to target directory on local computer
 
 # Move file from supercomputer to local computer:
