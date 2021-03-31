@@ -2,20 +2,18 @@
 
 To watch an online lecture that introduces singularities and software containers for high-powered computing, [see this YouTube video](https://www.youtube.com/watch?v=vEjLuX0ClN0&t=1276s)
 
-This tutorial will show you how to download and use the bioinformatics program [VCFTools](https://vcftools.github.io/man_latest.html) as a singularity on Klone.
+This tutorial will show you how to download and use the bioinformatics program [VCFtools](https://vcftools.github.io/man_latest.html) as a singularity on Klone.
 
-You will learn how to transfer a vcf file containing genotype data from your local computer, filter the vcf file using vcftools, and copy the filtered vcf back to your local computer.  
-
-In the process, you will also learn how to download and use a singularity containing the software VCFTools from singularity hub.
+You will learn how to transfer a vcf file containing genotype data from your local computer, filter the vcf file using *VCFtools*, and copy the filtered vcf back to your local computer.  In the process, you will also learn how to download and use a singularity containing the software *VCFtools* from the website Singularity Hub.
 
 ## Step 1. Transfer a vcf file to klone from your local computer
 
-``` bash
-# open a UNIX terminal and log into klone using secure shell (ssh) and your UW netID
+```
+# Open a UNIX terminal and log into klone using secure shell (ssh) and your UW netID. Here is how I (elpetrou) do this:
 
 ssh elpetrou@klone.hyak.uw.edu
 
-# transfer a vcf file to Klone using the secure copy command (scp). scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
+# Transfer a vcf file to Klone using the secure copy command (scp). scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
 
 # Specify the directories and file names as arguments 
 
@@ -30,7 +28,7 @@ $DIR2
 
 ```
 
-## Step 2. Download an existing singularity (.sif file) from *Singularity Hub* 
+## Step 2. Download an existing singularity from *Singularity Hub* 
 
 [Singularity Hub](https://singularity-hub.org/) is a website that contains ready-made singularities with commonly used bioinformatics software that you can download.
 
@@ -52,11 +50,11 @@ module load singularity
 singularity pull shub://TomHarrop/singularity-containers:vcftools_0.1.16
 
 ```
-Congratulations! You have downloaded a singularity to Klone.
+Congratulations! You have downloaded the *VCFtools* singularity to Klone. 
 
 ## Step 3. Use the VCFTools singularity
 
-Log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). For example, my directory is:
+To use the singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). For example, my directory is:
 
 ```
 cd /gscratch/merlab/elpetrou
@@ -74,7 +72,6 @@ srun -p compute-hugemem -A merlab --nodes=1 \
 --ntasks-per-node=1 --time=01:00:00 \
 --mem=20G --pty /bin/bash
 ```
-
 Note that When you are on a compute node, your username in the terminal will appear to be <UWnetid@<nodename>, for example: elpetrou@n3077 
 
 Load the singularity module on Klone so you can use the VCFTools singularity that you just saved to Klone.
@@ -114,11 +111,6 @@ singularity exec \
 $MY_SINGULARITY \
 vcftools --vcf $MY_FOLDER'/'$IN_VCF \
 --indv 2B_13 \ # name of individual to keep in vcf file
---indv 2B_08 \
---indv 2B_10 \
---indv 2B_12 \
---indv 2B_14 \
---indv 2B_19 \
 --recode --recode-INFO-all \
 --out $MY_FOLDER'/'$OUT_VCF
 
@@ -131,9 +123,9 @@ Nota Bene: you have to type these commands into a terminal on your local compute
 ```
 # Specify directories and file names
 
-DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou
-FILE=0002.filt.HWE.tidy.snpid.duplicates.recode.vcf
-DIR2=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered
+DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # Path to directory containing the files to be copied
+FILE=herring.filt.vcf # file to be copied
+DIR2=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered # Path to target directory
 
 # Move file from supercomputer to local computer:
 scp $DIR1'/'$FILE \
