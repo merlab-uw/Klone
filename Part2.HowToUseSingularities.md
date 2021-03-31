@@ -80,8 +80,8 @@ sinfo
 You will see something like:
 
 | PARTITION                  |        AVAIL         | TIMELIMIT                     | NODES                 | STATE               | NODELIST          |
-|:---------------------------|:--------------------:|:-------------------------------:|:-------------------:||:-------------------:||:-------------------:|
-| compute-hugemem            | up                   | infinite                       | 16                   |idle               | n[3000-3007,3016-3021,3065,3067]|
+|:--------------------------:|:--------------------:|:-----------------------------:|:---------------------:|:-------------------:|:-------------------:|
+| compute-hugemem            | up                   | infinite                      | 16                    |idle                  | n[3000-3007,3016-3021,3065,3067]|
 
 
 
@@ -89,14 +89,15 @@ If there are free compute nodes, submit a request for an interactive session on 
 This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), 
 while the -A argument is our group's name (merlab) on Klone.
 
-```
+``` bash
+
 srun -p compute-hugemem -A merlab --nodes=1 \
 --ntasks-per-node=1 --time=01:00:00 \
 --mem=20G --pty /bin/bash
 ```
-Note that When you are on a compute node, your username in the terminal will appear to be <UWnetid@<nodename>, for example: elpetrou@n3077 
+Note that when you are on a compute node, your username in the terminal will appear to be <UWnetid>@<nodename>, like this for example: elpetrou@n3077 
 
-Load the singularity module on Klone so you can use the VCFTools singularity that you just saved to Klone.
+Next, load the singularity module  so you can use the VCFtools singularity that you just downloaded.
 
 ```
 module load singularity
@@ -106,7 +107,8 @@ module load singularity
 The exec Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system
 USAGE: singularity [...] exec [exec options...] <container path> <command>
 
-```
+``` bash
+
 MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # specify the path to the singularity you want to run
 
 singularity exec \ # use the exec command to call the singularity and run commands that are specific to the VCFTools software
@@ -114,6 +116,8 @@ $MY_SINGULARITY \
 vcftools --version 
 
 ```
+In the terminal, you should see this :
+
 
 ### Exercise #2: Using the VCFTools singularity, filter & retain a small number of individuals in your vcf file
 
