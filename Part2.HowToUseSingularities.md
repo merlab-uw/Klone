@@ -1,0 +1,127 @@
+This tutorial will show you how to download and use vcftools as a singularity on Klone.
+
+You will learn how to transfer a vcf file from your local computer, filter the vcf using vcftools, and copy the data back to your local computer.  
+In the process, you will also learn how to download and use a singularity containing the software VCFTools from singularity hub.
+
+## Step 1. Transfer a vcf file to klone from your local computer
+
+``` bash
+# open a terminal and log into klone using secure shell (ssh) and your username
+ssh elpetrou@klone.hyak.uw.edu
+
+# transfer file TO klone using secure copy command (scp). scp copies files between hosts on a network, using ssh for data transfer. 
+
+# Specify directories and file names as arguments (to make code more readable)
+
+DIR1=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered #where the file lives on my local computer
+FILE=0002.filt.HWE.tidy.snpid.recode.vcf #the file to be copied
+DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou #where I want the file to go on Klone
+
+# Copy the files to Klone
+scp $DIR1'/'$FILE \
+$DIR2
+
+```
+
+## Step 2. Download an existing singularity (.sif file) from *Singularity Hub* 
+
+The website for *Singularity Hub* is : https://singularity-hub.org/
+The URI for this particular vcftools singularity is TomHarrop/singularity-containers:vcftools_0.1.16
+
+``` bash
+
+# Navigate to folder where you want to save the singularity in (.sif file)
+cd /gscratch/merlab/singularity_sif
+
+# Load singularity module
+module load singularity
+
+# Pull the singularity from the web (this example has vcftools)
+singularity pull shub://TomHarrop/singularity-containers:vcftools_0.1.16
+
+```
+
+## Step 3. Use the singularity
+
+Log into a Klone terminal and navigate to your personal gscratch directory on Klone, which will be /gscratch/merlab/<username>. For example, my directory is:
+
+```
+cd /gscratch/merlab/elpetrou
+```
+Using the *sinfo* command, take a peek at what partitions/compute nodes are available (and what their names are) on klone:
+
+```
+sinfo
+```
+
+Submit a request for an interactive session on one of Klone's compute nodes.
+This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), while the -A argument is our group's name (merlab) on Klone.
+
+```
+srun -p compute-hugemem -A merlab --nodes=1 \
+--ntasks-per-node=1 --time=01:00:00 \
+--mem=20G --pty /bin/bash
+```
+
+Note that When you are on a compute node, your username in the terminal will appear to be something like elpetrou@n3077 
+
+
+# Load singularity module (in case you skipped step 2)
+module load singularity
+
+# Use the vcftools singularity (finally! phew!)
+# The exec Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system
+# USAGE: singularity [...] exec [exec options...] <container path> <command>
+
+# Exercise #1: Using the vcftools singularity, have vcftools print its version to the screen
+# I save the path to my vcftools .sif file as an argument, so the code looks tidy
+MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif
+
+singularity exec \
+$MY_SINGULARITY \
+vcftools --version 
+
+# Exercise #2: Using the vcftools singularity, filter & retain a small number of individuals in your vcf file
+# You will use the vcftools --indv command to specify the names of individuals yuo want to retain in vcf file
+
+MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif
+MY_FOLDER=/gscratch/merlab/elpetrou # the folder where I have saved the vcf file
+
+cd $MY_FOLDER
+
+singularity exec \
+$MY_SINGULARITY \
+vcftools --vcf 0002.filt.HWE.tidy.snpid.recode.vcf \
+--indv 2B_13 \
+--indv 2B_08 \
+--indv 2B_10 \
+--indv 2B_12 \
+--indv 2B_14 \
+--indv 2B_19 \
+--recode --recode-INFO-all \
+--out 0002.filt.HWE.tidy.snpid.duplicates #basename of output file
+
+####################################################################
+#Step 4. Transfer files back TO local computer FROM klone using the secure copy command (scp)
+
+# Note : you have to type these commands into a terminal on your local computer (elpetrou@ubuntu or whatever)
+
+# Specify directories and file names
+DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou
+FILE=0002.filt.HWE.tidy.snpid.duplicates.recode.vcf
+DIR2=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered
+
+# Move file from supercomputer to local computer:
+scp $DIR1'/'$FILE \
+$DIR2
+
+###### URIs of containers that I want
+jlboat/BioinfoContainers:trimmomatic
+jlboat/BioinfoContainers:fastqc
+ous-uio-bioinfo-core/containerised_ATACseq_pipeline:multiqc
+ous-uio-bioinfo-core/containerised_ATACseq_pipeline:bowtie2
+TomHarrop/singularity-containers:r_3.5.0
+ous-uio-bioinfo-core/containerised_ATACseq_pipeline:samtools
+ous-uio-bioinfo-core/containerised_ATACseq_pipeline:picard
+
+
