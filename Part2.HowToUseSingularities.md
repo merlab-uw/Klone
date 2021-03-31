@@ -110,7 +110,7 @@ USAGE: singularity [...] exec [exec options...] <container path> <command>
 ``` bash
 
 # Specify the path and the name of the singularity you want to use
-MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # specify the path to the singularity you want to run
+MYSINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # specify the path to the singularity you want to run
 
 # Load the singularity module
 module load singularity
@@ -118,7 +118,7 @@ module load singularity
 # Use the singularity exec command to use the singularity and run commands that are specific to the software it contains (VCFtools, in this case)
 
 singularity exec \ 
-$MY_SINGULARITY \
+$MYSINGULARITY \
 vcftools --version 
 ```
 In the terminal, you should see this print: 
@@ -130,35 +130,35 @@ Yay! You just connected to VCFtools using a singularity!
 
 ### Exercise #2: Using the VCFTools singularity, filter & retain one individual in your vcf file
 
-This exercise demonstrates how to use VCFtools as a singularity. We will use the vcftools --indv command to specify one sample that we want to retain in vcf file.
+We will use the vcftools --indv command to specify one sample that we want to retain in vcf file.
 
-```
-MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # name of singularity that I want to use
-MY_DIR=/gscratch/merlab/elpetrou # path to directory where I have saved the vcf file
-IN_VCF=herring.vcf # name of input vcf file
-OUT_VCF=herring.filt # base name of output vcf (without .vcf file extendion)
+``` bash
 
-KEEP_INDIV=Case07_001 # name of individual sample to keep in vcf file
+MYSINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # name of singularity that I want to use
+MYDIR=/gscratch/merlab/elpetrou # path to directory where I have saved the vcf file
+INVCF=herring.vcf # name of input vcf file
+OUTVCF=herring.filt # base name of output vcf (without .vcf file extendion)
+KEEPINDIV=Case07_001 # name of individual sample to keep in vcf file
 
 singularity exec \
-$MY_SINGULARITY \
-vcftools --vcf $MY_DIR'/'$IN_VCF \
---indv $KEEP_INDIV \ 
+$MYSINGULARITY \
+vcftools --vcf $MYDIR'/'$INVCF \
+--indv $KEEPINDIV \
 --recode --recode-INFO-all \
---out $MY_DIR'/'$OUT_VCF
+--out $MYDIR'/'$OUTVCF
 
 ```
 
 ## Step 4. Transfer files back to local computer from klone using the secure copy command (scp)
  
-Nota Bene: you have to type these commands into a terminal on your local computer and NOT in a Klone terminal. So open up a new terminal and type:
+Open up a new terminal in your local computer and type something like this:
 
 ```
 # Specify directories and file names
 
-DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # Path to directory containing the files to be copied
-FILE=herring.filt.vcf # file to be copied
-DIR2=/mnt/hgfs/D # Path to target directory
+DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # Path to directory on Klone containing the files to be copied
+FILE=herring.filt.vcf # name of file to be copied
+DIR2=/mnt/hgfs/D # Path to target directory on local computer
 
 # Move file from supercomputer to local computer:
 scp $DIR1'/'$FILE \
@@ -166,6 +166,6 @@ $DIR2
 
 ```
 
-
+You should have been able to transfer to herring.filt.vcf to your local computer. Hurrah!
 
 
