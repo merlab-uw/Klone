@@ -1,23 +1,30 @@
-This tutorial will show you how to download and use vcftools as a singularity on Klone.
+# Notes about using software stored in singularities on Klone
 
-You will learn how to transfer a vcf file from your local computer, filter the vcf using vcftools, and copy the data back to your local computer.  
+To watch an online lecture that introduces singularities and software containers for high-powered computing, [see this YouTube video](https://www.youtube.com/watch?v=vEjLuX0ClN0&t=1276s)
+
+This tutorial will show you how to download and use the bioinformatics program [VCFTools](https://vcftools.github.io/man_latest.html) as a singularity on Klone.
+
+You will learn how to transfer a vcf file containing genotype data from your local computer, filter the vcf file using vcftools, and copy the filtered vcf back to your local computer.  
+
 In the process, you will also learn how to download and use a singularity containing the software VCFTools from singularity hub.
 
 ## Step 1. Transfer a vcf file to klone from your local computer
 
 ``` bash
-# open a terminal and log into klone using secure shell (ssh) and your username
+# open a UNIX terminal and log into klone using secure shell (ssh) and your UW netID
+
 ssh elpetrou@klone.hyak.uw.edu
 
-# transfer file TO klone using secure copy command (scp). scp copies files between hosts on a network, using ssh for data transfer. 
+# transfer a vcf file to Klone using the secure copy command (scp). scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
 
-# Specify directories and file names as arguments (to make code more readable)
+# Specify the directories and file names as arguments 
 
 DIR1=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered #where the file lives on my local computer
 FILE=0002.filt.HWE.tidy.snpid.recode.vcf #the file to be copied
 DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou #where I want the file to go on Klone
 
-# Copy the files to Klone
+# Copy the files to Klone with scp
+
 scp $DIR1'/'$FILE \
 $DIR2
 
@@ -25,7 +32,8 @@ $DIR2
 
 ## Step 2. Download an existing singularity (.sif file) from *Singularity Hub* 
 
-The website for *Singularity Hub* is : https://singularity-hub.org/
+[Singularity Hub](https://singularity-hub.org/) is a website that contains ready-made singularities with commonly used bioinformatics software that you can download.
+
 The URI for this particular vcftools singularity is TomHarrop/singularity-containers:vcftools_0.1.16
 
 ``` bash
