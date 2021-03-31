@@ -155,7 +155,7 @@ vcftools --vcf $INVCF \
 ```
 If you type ls you will see that there is a file called *herring.filt.recode.vcf* in your folder!
 
-## Step 4. Transfer files back to local computer from klone using the secure copy command (scp)
+## Step 4. Transfer files back to local computer from klone using *scp*
  
 Open up a new terminal in your local computer and type something like this:
 
@@ -172,6 +172,6 @@ $DIR2
 
 ```
 
-You should have been able to transfer to herring.filt.vcf to your local computer. Hurrah!
+You should have been able to transfer the file *herring.filt.recode.vcf* to your local computer. Hurrah!
 
 
