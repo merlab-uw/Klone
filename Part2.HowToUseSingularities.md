@@ -14,43 +14,44 @@ You will learn how to:
 
 ## Step 1. Transfer a vcf file to Klone from your local computer
 
-First we need to transfer some data to Klone, so we can manipulate it. In this example, I transfer a vcf file containing genotypes.
+First we need to transfer some data to Klone, so we can manipulate it. In this example, we will transfer a vcf file called *herring.vcf* to a directory on Klone.
 
-Let's open a UNIX terminal on our local computer and transfer a vcf file to Klone using the secure copy command (scp).
+Let's open a UNIX terminal on our local computer and transfer the vcf file to Klone using the secure copy command (scp).
 
 ``` bash
 
 # scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
 # First, specify the directories and file names as arguments 
 
-DIR1=/mnt/hgfs/D #where the file lives on my local computer
-FILE=herring.vcf #the file to be copied
-DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou #where I want the file to go on Klone
+DIR1=/mnt/hgfs/D # where the file is located on my local computer
+FILE=herring.vcf # the name of file to be copied
+DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou # where I want the file to go on Klone
 
 # Copy the files to Klone with scp
 
 scp $DIR1'/'$FILE \
 $DIR2
 
-# After you type in the command above, you will be prompted to authenticate yourself as a user on Klone.
-# To do this, you will need to type in your UW Netid password and use DUO two-factor authentication. 
-
 ```
+After you type in the commands above, you will be prompted to authenticate yourself as a user on Klone.
+To do this, you will need to type in your UW Netid password and use DUO two-factor authentication. 
+
 
 ## Step 2. Log into Klone terminal and download a singularity from *Singularity Hub* 
 
-First we need to log into Klone using the secure shell (ssh) command. The syntax is ssh <username>@klone.hyak.uw.edu. For example, this is what I type:
+Next, we will into Klone using the secure shell (ssh) command. The syntax for ssh is: ssh <username>@klone.hyak.uw.edu. 
+For example, this is what I type into a terminal:
 
 ```
 ssh elpetrou@klone.hyak.uw.edu
 ```
-
-Next, we will download a singularity containing the software VCFtools from [Singularity Hub](https://singularity-hub.org/). This is a website that contains many singularities with commonly used bioinformatics software.
+ 
+ We will download a singularity containing the software *VCFtools* from [Singularity Hub](https://singularity-hub.org/). This is a website that contains many singularities with commonly used bioinformatics software.
 
  - To learn more about Singularity Hub, [read this manual](https://singularityhub.github.io/singularityhub-docs/#pancakes-getting-started)
- - Nota Bene: To search for and download singularities from Singularity Hub, you will need to sign in to Singularity Hub using your GitHub account.
+ - Nota Bene: To search for and download singularities from Singularity Hub, you will need to sign into Singularity Hub using your GitHub account.
 
-In this example, we will download VCFTools from Singularity Hub from a user named TomHarrop. To do this, we will use the *singularity pull* command, and the singularity's Uniform Resource Identifier (URI): TomHarrop/singularity-containers:vcftools_0.1.16
+In this example, we will download VCFtools from Singularity Hub from a user named TomHarrop. To do this, we will use the *singularity pull* command, and the singularity's Uniform Resource Identifier (URI): TomHarrop/singularity-containers:vcftools_0.1.16
 
 ``` bash
 
@@ -64,14 +65,13 @@ module load singularity
 singularity pull shub://TomHarrop/singularity-containers:vcftools_0.1.16
 
 ```
-Congratulations! You have downloaded the *VCFtools* singularity to Klone. It is saved to the directory /gscratch/merlab/singularity_sif and it has this file name:
-  
-  singularity-containers_vcftools_0.1.16.sif
+Congratulations! You have downloaded the *VCFtools* singularity to Klone. It is saved to the directory /gscratch/merlab/singularity_sif 
+and it has this file name: *singularity-containers_vcftools_0.1.16.sif*
 
 ## Step 3. Use the VCFtools singularity
 
 To use the VCFtools singularity you just downloaded, log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). 
-For example, my directory is /gscratch/merlab/elpetrou, so this is how I nanavigate to it:
+For example, my directory is /gscratch/merlab/elpetrou, so this is how I navigate to it:
 
 ```
 cd /gscratch/merlab/elpetrou
@@ -89,7 +89,7 @@ You will see something like:
 
 
 
-If there are free compute nodes, submit a request for an interactive session on one of them.
+If there are idle compute nodes, submit a request for an interactive session on one of them.
 This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), 
 while the -A argument is our group's name (merlab) on Klone.
 
@@ -101,26 +101,31 @@ srun -p compute-hugemem -A merlab --nodes=1 \
 ```
 Note that when you are on a compute node, your username in the terminal will appear to be <UWnetid>@<nodename>, like this for example: elpetrou@n3077 
 
-Next, load the singularity module  so you can use the VCFtools singularity that you just downloaded.
 
-```
-module load singularity
-```
-### Exercise #1: Using the VCFtools singularity, have VCFtools print its version to the terminal
+### Exercise #1: Using the VCFtools singularity, have VCFtools print its software version to the terminal
 
 The exec Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system
 USAGE: singularity [...] exec [exec options...] <container path> <command>
 
 ``` bash
 
+# Specify the path and the name of the singularity you want to use
 MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # specify the path to the singularity you want to run
 
-singularity exec \ # use the exec command to call the singularity and run commands that are specific to the VCFTools software
+# Load the singularity module
+module load singularity
+
+# Use the singularity exec command to use the singularity and run commands that are specific to the software it contains (VCFtools, in this case)
+
+singularity exec \ 
 $MY_SINGULARITY \
 vcftools --version 
-
 ```
-In the terminal, you should see this: VCFtools (0.1.16). Yay! You are using VCFtools on Klone!
+In the terminal, you should see this print: 
+
+VCFtools (0.1.16). 
+
+Yay! You just connected to VCFtools using a singularity!
 
 
 ### Exercise #2: Using the VCFTools singularity, filter & retain one individual in your vcf file
