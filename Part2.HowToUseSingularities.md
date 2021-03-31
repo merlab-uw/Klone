@@ -34,7 +34,11 @@ $DIR2
 
 [Singularity Hub](https://singularity-hub.org/) is a website that contains ready-made singularities with commonly used bioinformatics software that you can download.
 
-The URI for this particular vcftools singularity is TomHarrop/singularity-containers:vcftools_0.1.16
+To learn more about Singularity Hub, [read this manual](https://singularityhub.github.io/singularityhub-docs/#pancakes-getting-started)
+
+Nota Bene: To search for and download singularities from Singularity Hub, you will need to sign in to Singularity Hub using your GitHub account.
+
+In this example, we will download VCFTools from Singularity Hub from a user named TomHarrop. To do this, we will use the *singularity pull* command, and the singularity's Uniform Resource Identifier (URI): TomHarrop/singularity-containers:vcftools_0.1.16
 
 ``` bash
 
@@ -48,21 +52,21 @@ module load singularity
 singularity pull shub://TomHarrop/singularity-containers:vcftools_0.1.16
 
 ```
+Congratulations! You have downloaded a singularity to Klone.
 
-## Step 3. Use the singularity
+## Step 3. Use the VCFTools singularity
 
-Log into a Klone terminal and navigate to your personal gscratch directory on Klone, which will be /gscratch/merlab/<username>. For example, my directory is:
+Log into a Klone terminal and navigate to your personal gscratch directory on Klone (/gscratch/merlab/<username>). For example, my directory is:
 
 ```
 cd /gscratch/merlab/elpetrou
 ```
-Using the *sinfo* command, take a peek at what partitions/compute nodes are available (and what their names are) on klone:
+Using the *sinfo* command, take a peek at what partitions and compute nodes are currently available (and what their names are) on klone:
 
 ```
 sinfo
 ```
-
-Submit a request for an interactive session on one of Klone's compute nodes.
+If there are free compute nodes, submit a request for an interactive session on one of them.
 This will be done using the *srun* command. The -p argument specifies the partition name (refer to previous step), while the -A argument is our group's name (merlab) on Klone.
 
 ```
@@ -71,7 +75,7 @@ srun -p compute-hugemem -A merlab --nodes=1 \
 --mem=20G --pty /bin/bash
 ```
 
-Note that When you are on a compute node, your username in the terminal will appear to be something like elpetrou@n3077 
+Note that When you are on a compute node, your username in the terminal will appear to be <UWnetid@<nodename>, for example: elpetrou@n3077 
 
 Load the singularity module on Klone so you can use the VCFTools singularity that you just saved to Klone.
 
@@ -84,15 +88,17 @@ The exec Singularity sub-command allows you to spawn an arbitrary command within
 USAGE: singularity [...] exec [exec options...] <container path> <command>
 
 ```
-MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif
+MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # specify the path to the singularity you want to run
 
-singularity exec \
+singularity exec \ # use the exec command to call the singularity and run commands that are specific to the VCFTools software
 $MY_SINGULARITY \
 vcftools --version 
 
 ```
 
 ### Exercise #2: Using the VCFTools singularity, filter & retain a small number of individuals in your vcf file
+
+This exercise demonstrates how to call VCFTools commands from the VCFTools singularity.
 
 You will use the vcftools --indv command to specify the names of individuals you want to retain in vcf file
 
