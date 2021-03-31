@@ -65,48 +65,58 @@ srun -p compute-hugemem -A merlab --nodes=1 \
 
 Note that When you are on a compute node, your username in the terminal will appear to be something like elpetrou@n3077 
 
+Load the singularity module on Klone so you can use the VCFTools singularity that you just saved to Klone.
 
-# Load singularity module (in case you skipped step 2)
+```
 module load singularity
+```
+### Exercise #1: Using the VCFTools singularity, have VCFTools print its version to the terminal
 
-# Use the vcftools singularity (finally! phew!)
-# The exec Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system
-# USAGE: singularity [...] exec [exec options...] <container path> <command>
+The exec Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system
+USAGE: singularity [...] exec [exec options...] <container path> <command>
 
-# Exercise #1: Using the vcftools singularity, have vcftools print its version to the screen
-# I save the path to my vcftools .sif file as an argument, so the code looks tidy
+```
 MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif
 
 singularity exec \
 $MY_SINGULARITY \
 vcftools --version 
 
-# Exercise #2: Using the vcftools singularity, filter & retain a small number of individuals in your vcf file
-# You will use the vcftools --indv command to specify the names of individuals yuo want to retain in vcf file
+```
 
-MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif
-MY_FOLDER=/gscratch/merlab/elpetrou # the folder where I have saved the vcf file
+### Exercise #2: Using the VCFTools singularity, filter & retain a small number of individuals in your vcf file
+
+You will use the vcftools --indv command to specify the names of individuals you want to retain in vcf file
+
+```
+MY_SINGULARITY=/gscratch/merlab/singularity_sif/singularity-containers_vcftools_0.1.16.sif # name of singularity that I want to use
+MY_FOLDER=/gscratch/merlab/elpetrou # path to folder where I have saved the vcf file
+IN_VCF=herring.vcf # name of input vcf file
+OUT_VCF=herring.filt # base name of output vcf (without .vcf file extendion)
 
 cd $MY_FOLDER
 
 singularity exec \
 $MY_SINGULARITY \
-vcftools --vcf 0002.filt.HWE.tidy.snpid.recode.vcf \
---indv 2B_13 \
+vcftools --vcf $MY_FOLDER'/'$IN_VCF \
+--indv 2B_13 \ # name of individual to keep in vcf file
 --indv 2B_08 \
 --indv 2B_10 \
 --indv 2B_12 \
 --indv 2B_14 \
 --indv 2B_19 \
 --recode --recode-INFO-all \
---out 0002.filt.HWE.tidy.snpid.duplicates #basename of output file
+--out $MY_FOLDER'/'$OUT_VCF
 
-####################################################################
-#Step 4. Transfer files back TO local computer FROM klone using the secure copy command (scp)
+```
 
-# Note : you have to type these commands into a terminal on your local computer (elpetrou@ubuntu or whatever)
+## Step 4. Transfer files back to local computer from klone using the secure copy command (scp)
+ 
+Nota Bene: you have to type these commands into a terminal on your local computer and NOT in a Klone terminal
 
+```
 # Specify directories and file names
+
 DIR1=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou
 FILE=0002.filt.HWE.tidy.snpid.duplicates.recode.vcf
 DIR2=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_filtered
@@ -115,13 +125,8 @@ DIR2=/media/ubuntu/Herring_aDNA/hybridization_capture/merged_analyses/variants_f
 scp $DIR1'/'$FILE \
 $DIR2
 
-###### URIs of containers that I want
-jlboat/BioinfoContainers:trimmomatic
-jlboat/BioinfoContainers:fastqc
-ous-uio-bioinfo-core/containerised_ATACseq_pipeline:multiqc
-ous-uio-bioinfo-core/containerised_ATACseq_pipeline:bowtie2
-TomHarrop/singularity-containers:r_3.5.0
-ous-uio-bioinfo-core/containerised_ATACseq_pipeline:samtools
-ous-uio-bioinfo-core/containerised_ATACseq_pipeline:picard
+```
+
+
 
 
