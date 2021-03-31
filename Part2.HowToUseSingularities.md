@@ -16,15 +16,10 @@ You will learn how to:
 
 First we need to transfer some data to Klone, so we can manipulate it. In this example, I transfer a vcf file containing genotypes.
 
+Let's open a UNIX terminal on our local computer and transfer a vcf file to Klone using the secure copy command (scp).
+
 ``` bash
 
-# Open a UNIX terminal and log into klone using secure shell (ssh). 
-# To do this, you will need your UW netID, UW password, and DUO two-factor authentication. 
-# Here is how I (elpetrou) do this:
-
-ssh elpetrou@klone.hyak.uw.edu
-
-# Transfer a vcf file to Klone using the secure copy command (scp). 
 # scp copies files between hosts on a network, using secure shell (ssh) for data transfer. 
 # First, specify the directories and file names as arguments 
 
@@ -37,9 +32,18 @@ DIR2=elpetrou@klone.hyak.uw.edu:/gscratch/merlab/elpetrou #where I want the file
 scp $DIR1'/'$FILE \
 $DIR2
 
+# After you type in the command above, you will be prompted to authenticate yourself as a user on Klone.
+# To do this, you will need to type in your UW Netid password and use DUO two-factor authentication. 
+
 ```
 
-## Step 2. Download a singularity from *Singularity Hub* 
+## Step 2. Log into Klone terminal and download a singularity from *Singularity Hub* 
+
+First we need to log into Klone using the secure shell (ssh) command. The syntax is ssh <username>@klone.hyak.uw.edu. For example, this is what I type:
+
+```
+ssh elpetrou@klone.hyak.uw.edu
+```
 
 Next, we will download a singularity containing the software VCFtools from [Singularity Hub](https://singularity-hub.org/). This is a website that contains many singularities with commonly used bioinformatics software.
 
