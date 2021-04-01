@@ -5,4 +5,5 @@ This information is stored in the following markdown files:
 
 1. [HowToUseKlone.md](HowToUseKlone.md)
 2. [HowToUseSingularities.md](HowToUseSingularities.md)
+3. [HowToUseSlurm.md](https://github.com/merlab-uw/Klone/blob/main/HowToUseSlurm.md)
 
