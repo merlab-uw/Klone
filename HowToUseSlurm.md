@@ -64,11 +64,7 @@ This part of the script has the code that will do the analysis that you desire
 
 Here is an example of a tiny batch script that allowed me to navigate to specific directory on Klone and unzip all of the files that ended in .fastq.gz
 
-  - Before running the script, I typed `sinfo` into the terminal to see what partitions were available. 
-  - After running the script, I typed `squeue --account merlab` to see information about the job and see its job id
-  - I also typed `scontrol show job <jobid>` to see very detailed information about the job I was running.
-
-
+ 
 
 ``` bash
 #!/bin/bash
@@ -107,5 +103,11 @@ cd ~
 # Run the sbatch script
 sbatch gunzip.sh
 ```
+
+Some additional notes:
+
+ - Before running the script, I typed `sinfo` into the terminal to see what partitions were available. 
+ - After running the script, I typed `squeue --account merlab` to see information about the job and see its job id
+ - I also typed `scontrol show job <jobid>` to see very detailed information about the job I was running.
 
 Good luck with your sbatch scripting!! 
