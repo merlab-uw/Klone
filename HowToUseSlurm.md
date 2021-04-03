@@ -110,4 +110,71 @@ Some additional notes:
  - After running the script, I typed `squeue --account merlab` to see information about the job and see its job id
  - I also typed `scontrol show job <jobid>` to see very detailed information about the job I was running.
 
+### Example of a slurm batch script that runs software via a singularity
+
+Here is a slightly more complicated example of a sbatch script. In this script, I use singularity to run the software FastQC over all files in a directory that end with the suffix ".fastq". All FastQC output files (which end in the suffixes "_fastqc", ".zip.", and ".html") are subsequently moved to a directory called "fastqc". 
+
+``` bash
+#!/bin/bash
+#SBATCH --job-name=elp_07
+#SBATCH --account=merlab
+#SBATCH --partition=compute-hugemem
+#SBATCH --nodes=1
+## Walltime (days-hours:minutes:seconds format)
+#SBATCH --time=8:00:00
+## Memory per node
+#SBATCH --mem=100G
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=elpetrou@uw.edu
+
+##### ENVIRONMENT SETUP ##########
+DATADIR=/mmfs1/gscratch/scrubbed/elpetrou/fastq/WA_herring
+OUTDIR=/mmfs1/gscratch/scrubbed/elpetrou/fastqc
+SAMPLELIST=fastq_list.txt
+MYSINGULARITY=/gscratch/merlab/singularity_sif/singularity-fastqc_0.11.9.sif
+
+## Load modules
+module load singularity
+
+#### CODE FOR JOB #####
+
+## go into the data directory
+cd $DATADIR 
+
+## save list of fastq files in this directory to a text file (for looping later)
+ls *.fastq > fastq_list.txt 
+
+## Use the singularity exec command to run fastqc program. The for loop will run fastQC for all files in this directory
+
+for SAMPLEFILE in `cat $SAMPLELIST`
+do
+	singularity exec \
+	$MYSINGULARITY \
+	fastqc -f fastq --extract \
+	$SAMPLEFILE
+done
+
+## Move all the fastqc results files (ending in _fastqc, .zip, .html) to the output directory
+
+for FILE in $DATADIR'/'*.html 
+do
+	mv $FILE $OUTDIR
+done
+
+
+
+for FILE in $DATADIR'/'*.zip 
+do
+	mv $FILE $OUTDIR
+done
+
+
+
+for FILE in $DATADIR'/'*_fastqc
+do
+	mv $FILE $OUTDIR
+done
+
+```
+
 Good luck with your sbatch scripting!! 
