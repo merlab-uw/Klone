@@ -118,7 +118,7 @@ This is the rsync command you can use from within Klone to move your files from 
 rsync -azvr --progress mox.hyak.uw.edu:/gscratch/merlab/whatever /gscratch/merlab/whatever
 ```
 
-If the lab node resources in use, you can run your job on resources beyond our dedicated capacity by using other people's unused hardware.  Jobs run this way are subject to pre-emption. That means that your job may never finish or it may be interrupted and not be able restart properly. To run a job on a partition that we do not own, use the same account (-A merlab) but change the partion from the name of our node to ckpt (i.e., -p ckpt instead of -p compute-hugemem).
+If the lab node resources are all in use, you can run your job on resources beyond our dedicated capacity. You'll be using other labs group's unused hardware or a set of nodes that are owned by UW and shared for this reason.  Jobs run this way are subject to pre-emption. That means that your job may never finish or it may be interrupted and not be able restart properly. To run a job on a partition that we do not own, use the same account (-A merlab) but change the partion from the name of our node to ckpt (i.e., -p ckpt instead of -p compute-hugemem).
 
 If you want to try to run on the ckpt partition, use this command to see how many nodes are idling
 
