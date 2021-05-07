@@ -16,7 +16,7 @@ The high power computing center at UW supports all computational research and pr
 
 ## Walk through of how you would use Hyak for computational research
 
-![](../_resources/c7dfc3407d3be03fc93d1a4b2bf44c69.png)
+![](/_resources/c7dfc3407d3be03fc93d1a4b2bf44c69.png)
 
 Using this paper from google scholar as an example, Nam walked us through the analysis the researchers did, using all the programs they used, but on Hyak. The authors used RAD seq and archived the data on NCBI , then used STACKs for genotyping, BayesScan and some R packages.
 
