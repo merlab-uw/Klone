@@ -1,6 +1,6 @@
-## MERLab node on Klone
+## MERLab node on Klone (and Lolo archive)
 
-This repository contains useful information and tutorials related to MERlabs's node on the UW Supercomputer (Klone).
+This repository contains useful information and tutorials related to MERlabs's node on the UW Supercomputer (Klone) and the Lolo archive.
 This information is stored in the following markdown files:
 
 1. [HowToUseKlone.md](HowToUseKlone.md)
