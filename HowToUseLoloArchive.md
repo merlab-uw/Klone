@@ -1,10 +1,11 @@
 # Notes about using UW's Lolo Archive 
 [UW's documentation page on lolo](https://wiki.cac.washington.edu/display/DataBackupsandArchives/lolo+User+Documentation)
+
 The UW's documentation covers both the "collaboration" and the "archive"; we do not have any space on the "collaboration" servers, so ignore that part!
 
 ## Background information on Lolo
 
-The Merlab has purchased dedicated space on the UW's Lolo archive, a long term storage space for large datasets. Lolo is tape based, which means it is intended for the long term storage of data sets that do not change- this is perfect for the storage of our raw sequence data. It should not be used for interactive access- you should not plan on accessing the data for interactive analyses, it is just a very secure back up for our large data sets. To work with the data, you will need to move it to another location, like Klone. 
+The Merlab has purchased dedicated space on the UW's Lolo Archive, a long term storage space for large datasets. Lolo is tape based, which means it is intended for the long term storage of data sets that do not change- this is perfect for the storage of our raw sequence data. The archive should not be used for interactive access which means you should not plan on accessing the data for interactive analyses, it is just a very secure back up for our large data sets. To work with the data you will need to move it to another location like the UW's super computer Klone. Moving the data to Klone can easily be done through ssh using rsync in the login node of Klone. 
 
 ## Lolo capacity
 
