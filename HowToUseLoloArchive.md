@@ -38,7 +38,3 @@ Using rsync
 _Transferring files using rsync over ssh is a supported option. There is one important caveat: when using rsync you must always use the -W or --whole-file option. This option disables the rsync transfer checksum algorithm which normally would speed the transfer of changed files by only sending changed bytes. On lolo, this algorithm will cause a tape recall of every file that already exists in order to have the file contents available to calculate the transfer checksum. This recall would be detrimental to lolo archive function and will result in poor performance of transfers. The -W or --whole-file option must always be used._
 
 _Using rsync has the benefit of ensuring integrity of transferred files. When rsync transfers a file it always calculates a checksum for the whole file and compares at the completion of the transfer. This works even in whole file (-W, --whole-file) mode._
-
-## Questions we're not sure the answer to yet 
-
-Does anyone who is part of our Hyak access group also have automatic access to lolo?
