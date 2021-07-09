@@ -177,4 +177,19 @@ done
 
 ```
 
+### How do you know how much memory or CPUs your job is using? 
+
+While the job is running you can look at what resources were allocated (requested) for that job using the command sacct, followed by the job number. Use squeue -A merlab to find the job numbers you're interested in. The output of the sacct command is not easy to read, so run this command to set the format as an evironmental variable, which makes the output readable. 
+
+```
+[ctarpey@klone1 scripts]$ export SACCT_FORMAT="JobID%20,JobName,User,Partition,NodeList,Elapsed,State,ExitCode,MaxRSS,AllocTRES%32"
+
+[ctarpey@klone1 scripts]$ sacct -j 408063
+               JobID    JobName      User  Partition        NodeList    Elapsed      State ExitCode     MaxRSS                        AllocTRES
+-------------------- ---------- --------- ---------- --------------- ---------- ---------- -------- ---------- --------------------------------
+              408063 pollock_b+  elpetrou compute-h+           n3016 2-04:49:28    RUNNING      0:0            billing=16,cpu=16,mem=200G,node+
+        408063.batch      batch                                n3016 2-04:49:28    RUNNING      0:0                      cpu=16,mem=200G,node=1
+       408063.extern     extern                                n3016 2-04:49:28    RUNNING      0:0            billing=16,cpu=16,mem=200G,node+
+```
+
 Good luck with your sbatch scripting!! 
