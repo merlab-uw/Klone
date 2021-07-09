@@ -192,4 +192,43 @@ While the job is running you can look at what resources were allocated (requeste
        408063.extern     extern                                n3016 2-04:49:28    RUNNING      0:0            billing=16,cpu=16,mem=200G,node+
 ```
 
+Another option is to ssh into the node that is running the job, and look at the resources in real time using the command top. Before you do this for the first time, use these commands on the log in node to set up your SSH key: 
+
+```
+ssh-keygen -C klone -t rsa -b 2048 -f ~/.ssh/id_rsa -q -N ""
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+Once you have your key you can use ssh followed by the node number (find this number using squeue or sacct) to enter the node running your job: 
+
+```
+ssh n3000
+top 
+```
+If there are many processes running, press the letter u followed by your netID to filter for your jobs. Below, you can see my jobs are not using nearly the amount of memory I requested, instead they are CPU limited. This can help you choose different CPU and MEM values next time!
+
+```
+[ctarpey@n3000 ~]$ top
+top - 16:15:25 up 31 days,  3:18,  2 users,  load average: 58.45, 57.72, 50.65
+Tasks: 542 total,  15 running, 527 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 16.8 us,  0.7 sy,  0.0 ni, 82.4 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem : 773706.2 total, 719563.8 free,  49268.1 used,   4874.2 buff/cache
+MiB Swap:  22892.0 total,  22892.0 free,      0.0 used. 716916.4 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+68187 ctarpey   20   0 2559400   1.4g   3664 R 100.3   0.2  23:59.26 i_baypass
+36025 ctarpey   20   0 2108840   1.2g   3432 R 100.0   0.2   1359:19 i_baypass
+40524 ctarpey   20   0 2559396   1.4g   3680 R 100.0   0.2   1351:33 i_baypass
+68212 ctarpey   20   0 2559396   1.4g   3584 R 100.0   0.2  23:54.50 i_baypass
+68255 ctarpey   20   0 2108840   1.2g   3516 R  99.7   0.2  23:32.98 i_baypass
+82770 ctarpey   20   0  294540   5968   4572 R   0.3   0.0   0:00.16 top
+36018 ctarpey   20   0  229936   3172   2632 S   0.0   0.0   0:00.00 slurm_script
+40517 ctarpey   20   0  229936   3232   2692 S   0.0   0.0   0:00.00 slurm_script
+68180 ctarpey   20   0  229920   3160   2636 S   0.0   0.0   0:00.00 slurm_script
+68205 ctarpey   20   0  229920   3124   2604 S   0.0   0.0   0:00.00 slurm_script
+68248 ctarpey   20   0  229920   3196   2676 S   0.0   0.0   0:00.00 slurm_script
+81812 ctarpey   20   0  170892   6648   4760 S   0.0   0.0   0:00.00 sshd
+81813 ctarpey   20   0  255040   4836   3984 S   0.0   0.0   0:00.00 bash
+```
+
 Good luck with your sbatch scripting!! 
