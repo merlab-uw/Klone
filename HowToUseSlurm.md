@@ -179,7 +179,7 @@ done
 
 ### How do you know how much memory or CPUs your job is using? 
 
-While the job is running you can look at what resources were allocated (requested) for that job using the command sacct, followed by the job number. Use squeue -A merlab to find the job numbers you're interested in. The output of the sacct command is not easy to read, so run this command to set the format as an evironmental variable, which makes the output readable. 
+While the job is running you can look at what resources were allocated (requested) for that job using the command sacct, followed by the job number. Use squeue -A merlab to find the job numbers you're interested in. Once the job has finished, the MaxRSS column will have the maximum memory that was used during the run. The output of the sacct command is not easy to read, so run this command to set the format as an evironmental variable, which makes the output readable. 
 
 ```
 [ctarpey@klone1 scripts]$ export SACCT_FORMAT="JobID%20,JobName,User,Partition,NodeList,Elapsed,State,ExitCode,MaxRSS,AllocTRES%32"
