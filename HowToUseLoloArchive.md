@@ -31,10 +31,41 @@ All files should be stored in the merlab shared directory which is located at /a
 
 The file structure of the merlab shared directory should mirror the structure of the shared directory on Klone. Files should thoughtfully and informatively named, and either be stored in folders with the researcher's name or for shared work, a folder with the name of the project. Interior file structure is at the discression and to suit the needs of the researcher. 
 
-## Transfering files to Lolo
+## Transfering files to Lolo with rsync
 This is taken directly from the UW's lolo documentation: 
 Using rsync
 
 _Transferring files using rsync over ssh is a supported option. There is one important caveat: when using rsync you must always use the -W or --whole-file option. This option disables the rsync transfer checksum algorithm which normally would speed the transfer of changed files by only sending changed bytes. On lolo, this algorithm will cause a tape recall of every file that already exists in order to have the file contents available to calculate the transfer checksum. This recall would be detrimental to lolo archive function and will result in poor performance of transfers. The -W or --whole-file option must always be used._
 
 _Using rsync has the benefit of ensuring integrity of transferred files. When rsync transfers a file it always calculates a checksum for the whole file and compares at the completion of the transfer. This works even in whole file (-W, --whole-file) mode._
+
+## Transfering files to Lolo with secure copy
+
+If transferring files with rsync does not work for you, try the secure copy command (scp). Below is an an example of how to do that.
+
+``` bash
+
+# Navigate to directory containing your files
+cd /mnt/hgfs/elpetrou/bam 
+
+# Tar (compress) the file or files you want to transfer into an archive. In this example, I will compress all files in a directory into a single archive.
+
+#Explanation of tar command:
+#tar -zcvf <archive-name.tar.gz> <source-directory-name>
+#-z : Compress archive using gzip program in Linux or Unix
+#-c : Create archive on Linux
+#-v : Verbose i.e display progress while creating archive
+#-f : Archive File name
+
+tar -zcvf bam_archive.tar.gz /mnt/hgfs/elpetrou/bam
+
+# Open a unix terminal on your local machine and transfer tarred archive to LOLO using scp
+
+MYFILE=/mnt/hgfs/elpetrou/bam/bam_archive.tar.gz
+TARGETDIR=elpetrou@lolo.uw.edu:/archive/merlab/herring_wgs/realigned_bam
+
+scp $MYARCHIVE $TARGETDIR
+
+
+```
+
