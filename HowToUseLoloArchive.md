@@ -61,7 +61,7 @@ tar -zcvf bam_archive.tar.gz /mnt/hgfs/elpetrou/bam
 
 # Open a unix terminal on your local machine and transfer tarred archive to LOLO using scp
 
-MYFILE=/mnt/hgfs/elpetrou/bam/bam_archive.tar.gz
+MYARCHIVE=/mnt/hgfs/elpetrou/bam/bam_archive.tar.gz
 TARGETDIR=elpetrou@lolo.uw.edu:/archive/merlab/herring_wgs/realigned_bam
 
 scp $MYARCHIVE $TARGETDIR
