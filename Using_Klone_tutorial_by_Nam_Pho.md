@@ -1,5 +1,3 @@
-Using Klone tutorial by UW's Nam Pho
-
 Nam Pho gave MerLab an introduction to UW's HPC (high powered computing) during a lab meeting in September of 2020. We had just purchased a node, but it had not been delivered yet and we wanted to get a basic understanding of how HPC works at UW.
 
 The first HPC system at UW was called Hyak, so Hyak is the name often associated with HPC at UW regardless of the actual system. Hyak coupld mean Mox or Klone, or just HPC at UW in general. 
