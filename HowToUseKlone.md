@@ -2,7 +2,7 @@
 
 ## Background information on the node
 
-The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two are Hyak and Mox. All three systems are independent of each other.
+The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two HPCC systems are Hyak and Mox. All three systems are independent of each other. Because Hyak was the first of UW's HPCC systems, sometimes Klone is refered to as Hyak. Merlab has never had a node on the actual first generation Hyak- so if you hear Hyak in our lab, they're refering to Klone. 
 
 For a great overview of High Performance Computing, watch [Introduction to HPC Computing: a practical tutorial](https://youtu.be/fkpofukvGeg)
 
@@ -22,8 +22,8 @@ There are some PDF tutorials in our [MerLab google drive, in the Tutorials & Wor
 
 
 ## UW's Klone Documentation
+### To learn how to use Klone, start with the UW's documentation. They will walk you through every step of the process, from making sure you have an account to transfering your files and setting up your first scripts. The information on our github is meant to be supplemental to the UW's documentation, focusing on tips and tricks we've learned and examples of our own code that has successfully run on Klone. 
 
-* [Daily klone status page](https://uwrc.github.io/blog/2021/02/25/klone-soft-launch)
 * [Updated documentation](https://uwrc.github.io/docs/)
 
 
