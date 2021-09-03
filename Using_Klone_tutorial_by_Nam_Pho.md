@@ -1,10 +1,12 @@
-Using Hyak tutorial by UW's Nam Pho
+Using Klone tutorial by UW's Nam Pho
 
-Nam Pho gave MerLab an introduction to UW's Hyak HPC (high powered computing) during a lab meeting in September of 2020. We had just purchased a node, but it had not been delivered yet and we wanted to get a basic understanding of how HPC works at UW.
+Nam Pho gave MerLab an introduction to UW's HPC (high powered computing) during a lab meeting in September of 2020. We had just purchased a node, but it had not been delivered yet and we wanted to get a basic understanding of how HPC works at UW.
+
+The first HPC system at UW was called Hyak, so Hyak is the name often associated with HPC at UW regardless of the actual system. Hyak coupld mean Mox or Klone, or just HPC at UW in general. 
 
 When Nam gave us this tutorial we were expecting to work on the Mox system- which is UW's second generation HPC. Later we would learn that our node would be one of the first in the third generation- Klone. There are some slight differences between how Mox and Klone are set up, but I have tried to update this tutorial where I can with those changes. If something is not working, it could be that the command is slightly different on Klone (some of the node names have changed, as well as the logic around partitions and accounts). All the third party programs such as slurm, singularity etc will not have changed, so check online documentation or the manuals for more information.
 
-## Background on Hyak and HPCC at UW
+## Background on HPCC at UW
 
 ![](/_resources/9b1833d735c1d2e3b6c404ee2ebdd988.png)
 
