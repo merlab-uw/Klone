@@ -2,7 +2,7 @@
 
 ## Background information on the node
 
-The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two HPCC systems are Hyak and Mox. All three systems are independent of each other. Because Hyak was the first of UW's HPCC systems, sometimes Klone is refered to as Hyak. Merlab has never had a node on the actual first generation Hyak- so if you hear Hyak in our lab, they're refering to Klone. 
+The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two HPCC systems are Hyak and Mox. All three systems are independent of each other. Because Hyak was the first of UW's HPCC systems, sometimes Klone is refered to as Hyak. Merlab has never had a node on the actual first generation Hyak- so if you hear Hyak in our lab, they're refering to Klone. (The tutorial by Nam is an example where the name Hyak is used for the UW's HPCC system as a whole and also when referring specifically to Klone.) 
 
 For a great overview of High Performance Computing, watch [Introduction to HPC Computing: a practical tutorial](https://youtu.be/fkpofukvGeg)
 
