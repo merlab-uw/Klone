@@ -114,20 +114,22 @@ The [tutorial by Nam](https://github.com/merlab-uw/Klone/blob/main/Using_Hyak_tu
 
 ### Using the miniconda programs that are already installed on Klone
 We have already installed some programs on Klone using miniconda3.
-```admixture_env  bwa_env    multiqc_env  pcangsd      picard_env  samtools_env
-angsd_env      gatk3_env  ngsLD_env    pcangsd_env  plink_env   stacks_env
+```admixture_env  bwa_env    multiqc_env  
+pcangsd   picard_env  samtools_env
+angsd_env   gatk3_env  ngsLD_env    
+pcangsd_env  plink_env   stacks_env
 ```
 
 That installation is located in /gscratch/merlab/software. 
 In order to use those programs, you must add the miniconda path to your environment. 
 From a terminal that is logged into Klone, open your .bash_profile using the program vim. Vim is a text editor that allows you to make changes to text files and save them within the terminal. 
 
-```
+```bash
 vim ~/.bash_profile
 ```
 Type the lowercase letter *i* to be able to edit the document. Use the arrow keys on your keyboard to navigate in the document, and add the line <export PATH=$PATH:/gscratch/merlab/software/miniconda3/bin/> to the end of the document, so your /.bash_profile looks like this one: 
 
-```
+```bash
 # .bash_profile
 
 # Get the aliases and functions
@@ -139,18 +141,13 @@ fi
 export PATH=$PATH:/gscratch/merlab/software/miniconda3/bin/
 ```
 
-To save your changes and exit, hit your *esc* key and then type :wq! to write the edits to the file and close the document. Test to see if the changes worked by typing *bowtie2* into the terminal. If you get the help files for the program, conda was successfully added to your path. If not, log out and log back into Klone and see if it worked, or look at your /.bash_profile to make sure the path was successfully added there. 
-
+To save your changes and exit, hit your *esc* key and then type *:wq!* to write the edits to the file and close the document. Test to see if the changes worked by typing *bowtie2* into the terminal. If you get the help files for the program, the conda path was successfully added to your environment. If not, log out and log back into Klone and see if it worked, or look at your /.bash_profile to make sure the path was successfully added there. 
 
 ## Other Klone Specific Information
 
-This is the rsync command you can use from within Klone to move your files from Mox.
+If the lab node resources are all in use, you can run your job on resources beyond our dedicated capacity. You'll be using other lab group's unused hardware or a set of nodes that are owned by UW and shared for this reason.  Jobs run this way are subject to pre-emption. That means that your job may never finish or it may be interrupted and not be able restart properly. Usually a job that is run on ckpt will be interrupted every 4 hours to allow other users who have submitted jobs to run theirs for a while. If your program will take more than 4 hours to finish, write the script to keep this in mind, and either have it write the output continuously or have a way to pick up where it was when it was killed.
 
-```bash
-rsync -azvr --progress mox.hyak.uw.edu:/gscratch/merlab/whatever /gscratch/merlab/whatever
-```
-
-If the lab node resources are all in use, you can run your job on resources beyond our dedicated capacity. You'll be using other labs group's unused hardware or a set of nodes that are owned by UW and shared for this reason.  Jobs run this way are subject to pre-emption. That means that your job may never finish or it may be interrupted and not be able restart properly. To run a job on a partition that we do not own, use the same account (-A merlab) but change the partion from the name of our node to ckpt (i.e., -p ckpt instead of -p compute-hugemem).
+To run a job on a partition that we do not own, use the same account (-A merlab) but change the partion from the name of our node to ckpt (i.e., -p ckpt instead of -p compute-hugemem). 
 
 If you want to try to run on the ckpt partition, use this command to see how many nodes are idling
 
