@@ -113,15 +113,15 @@ elpetrou 1037  00:22:40 24  20Gn   1     merlab compute-h+    RUNNING     n3077
 The [tutorial by Nam](https://github.com/merlab-uw/Klone/blob/main/Using_Hyak_tutorial_by_Nam_Pho.md) gives an example of how to download and install programs as well as how to use singularities and programs that are already installed on Klone as modules. The github page [HowToUseSingularities](https://github.com/merlab-uw/Klone/blob/main/HowToUseSingularities.md) gives more information on how to use singularities to run programs on Klone. 
 
 ### Using the miniconda programs that are already installed on Klone
-We have already installed some programs on Klone using miniconda3.
+We have already installed some programs on Klone using miniconda3, and others are installed as environments. Here is a list of the conda enviroments that are available (as of Sep 2021).
 ```admixture_env  bwa_env    multiqc_env  
 pcangsd   picard_env  samtools_env
 angsd_env   gatk3_env  ngsLD_env    
 pcangsd_env  plink_env   stacks_env
 ```
 
-That installation is located in /gscratch/merlab/software. 
-In order to use those programs, you must add the miniconda path to your environment. 
+The miniconda3 installation is located in /gscratch/merlab/software. 
+In order to use those programs or environments, you must add the miniconda path to your environment. 
 From a terminal that is logged into Klone, open your .bash_profile using the program vim. Vim is a text editor that allows you to make changes to text files and save them within the terminal. 
 
 ```bash
@@ -142,6 +142,24 @@ export PATH=$PATH:/gscratch/merlab/software/miniconda3/bin/
 ```
 
 To save your changes and exit, hit your *esc* key and then type *:wq!* to write the edits to the file and close the document. Test to see if the changes worked by typing *bowtie2* into the terminal. If you get the help files for the program, the conda path was successfully added to your environment. If not, log out and log back into Klone and see if it worked, or look at your /.bash_profile to make sure the path was successfully added there. 
+
+After adding the path to the conda installation to your /.bash_profile, you can run the programs that are installed as environments using the following set of commands. First you will have to configure conda for your terminal. Use the command:
+
+```bash 
+conda init bash
+```
+You will get this message *==> For changes to take effect, close and re-open your current shell. <==* Close and re-open a new terminal and try to activate a conda environment to see if it worked. I'm testing to see if I can activate the *samtools* conda environment and run samtools.
+
+``` bash
+conda activate samtools_env
+```
+You should get the name of the environment before the tag of your NetID on the command line, if it worked. It should look like this: 
+
+``` bash 
+(base) [ctarpey@klone1 ctarpey]$ conda activate samtools_env
+(samtools_env) [ctarpey@klone1 ctarpey]$ 
+```
+Test out that you can run samtools by typing *samtools* in the command line; it should pull up the samtools help pages. 
 
 ## Other Klone Specific Information
 
