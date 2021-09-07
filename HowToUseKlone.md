@@ -161,6 +161,81 @@ You should get the name of the environment before the tag of your NetID on the c
 ```
 Test out that you can run samtools by typing *samtools* in the command line; it should pull up the samtools help pages. 
 
+### Running programs from a conda environment in an sbatch script
+
+For more general information on sbatch scripts, see the page [HowToUseSlurm.md](https://github.com/merlab-uw/Klone/blob/main/HowToUseSlurm.md)
+To use the programs that were installed using conda and are now conda environments, you should *source* the installation of conda in your sbatch script. Then activate the conda environment that you want to use. You can do that with these two commands: 
+
+```bash 
+source /gscratch/merlab/software/miniconda3/etc/profile.d/conda.sh
+conda activate <name_of_conda_environment>
+```
+
+When you have finished with the conda environment, deactivate it with the command *conda deactivate*
+
+This is what running a program using a conda environment would look like in an sbatch script. Here, Eleni has specified the directories and other inputs with shell variables, which are specified in the section *ENVIRONMENT SETUP* and later called in the script with the prefix *$*. She makes sure that nothing else is running with the command *module purge*, then sources the conda installation, and finally activates the conda environment she wants to run, *samtools_env*. Once the samtools environment is loaded, she moves to the working directory and runs the commands she wants for her analysis with samtools. When the analysis is complete, the output files are moved to a separate directory and the conda environment is deactivated. 
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=pollock_samtools
+#SBATCH --account=merlab
+#SBATCH --partition=compute-hugemem
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+## Walltime (days-hours:minutes:seconds format)
+#SBATCH --time=6-12:00:00
+## Memory per node
+#SBATCH --mem=100G
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=elpetrou@uw.edu
+
+##### ENVIRONMENT SETUP ##########
+## Specify the directory containing data
+DATADIR=/gscratch/scrubbed/awray130/sam #directory with sam files
+SUFFIX1=.sam #file suffix
+OUTDIR=/gscratch/scrubbed/awray130/bam # where to store output files
+MYCONDA=/gscratch/merlab/software/miniconda3/etc/profile.d/conda.sh # path to conda installation on our Klone node. Do NOT change this.
+MYENV=samtools_env #name of the conda environment containing samtools software. 
+
+## Activate the conda environment:
+## start with clean slate
+module purge
+
+## This is the filepath to our conda installation on Klone. Source command will allow us to execute commands from a file in the current shell
+source $MYCONDA
+
+## activate the conda environment
+conda activate $MYENV
+
+## Move into the working directory and run script
+cd $DATADIR
+
+## Run samtools commands. 
+
+for MYSAMPLEFILE in *$SUFFIX1
+do
+    echo $MYSAMPLEFILE
+    MYBASE=`basename --suffix=$SUFFIX1 $MYSAMPLEFILE`
+    samtools view -bS -F 4 $MYBASE'.sam' > $MYBASE'.bam'
+    samtools view -h -q 20 $MYBASE'.bam' | samtools view -buS - | samtools sort -o $MYBASE'_minq20_sorted.bam'
+    samtools index $MYBASE'_minq20_sorted.bam'
+done
+
+## Flag explanations for samtools view:
+## -b       output BAM
+## -h       include header in SAM output
+## -q INT   only include reads with mapping quality >= INT [0]
+##-F INT   only include reads with none of the bits set in INT set in FLAG [0] (aka when this is set to 4, you remove unmapped reads)
+
+# Move all of the bam files to the output directory
+mv *'.bam' $OUTDIR
+mv *'.bai' $OUTDIR
+
+## deactivate the conda environment
+conda deactivate
+```
+
+
 ## Other Klone Specific Information
 
 If the lab node resources are all in use, you can run your job on resources beyond our dedicated capacity. You'll be using other lab group's unused hardware or a set of nodes that are owned by UW and shared for this reason.  Jobs run this way are subject to pre-emption. That means that your job may never finish or it may be interrupted and not be able restart properly. Usually a job that is run on ckpt will be interrupted every 4 hours to allow other users who have submitted jobs to run theirs for a while. If your program will take more than 4 hours to finish, write the script to keep this in mind, and either have it write the output continuously or have a way to pick up where it was when it was killed.
