@@ -2,7 +2,7 @@
 
 ## Background information on the node
 
-The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two HPCC systems are Hyak and Mox. All three systems are independent of each other. Because Hyak was the first of UW's HPCC systems, sometimes Klone is refered to as Hyak. Merlab has never had a node on the actual first generation Hyak- so if you hear Hyak in our lab, they're refering to Klone. (The [tutorial by Nam](https://github.com/merlab-uw/Klone/blob/main/Using_Hyak_tutorial_by_Nam_Pho.md) is an example where the name Hyak is used for the UW's HPCC system as a whole and also when referring specifically to Klone.) 
+The MerLab has purchased a dedicated node on Klone, the latest of UW's High Powered Computer Cluster (HPCC) systems. The other two HPCC systems are Hyak and Mox. All three systems are independent of each other. Because Hyak was the first of UW's HPCC systems, sometimes Klone is refered to as Hyak. Merlab has never had a node on the actual first generation Hyak- so if you hear Hyak in our lab, they're refering to Klone. (The [tutorial by Nam](https://github.com/merlab-uw/Klone/blob/main/Using_Klone_tutorial_by_Nam_Pho.md) is an example where the name Hyak is used for the UW's HPCC system as a whole and also when referring specifically to Klone.) 
 
 For a great overview of High Performance Computing, watch [Introduction to HPC Computing: a practical tutorial](https://youtu.be/fkpofukvGeg)
 
@@ -110,7 +110,7 @@ User JobID Elapsed ReqCPUS ReqMem NNodes Account Partition State NodeList
 elpetrou 1037  00:22:40 24  20Gn   1     merlab compute-h+    RUNNING     n3077
 ```
 ## Installing programs on Klone
-The [tutorial by Nam](https://github.com/merlab-uw/Klone/blob/main/Using_Hyak_tutorial_by_Nam_Pho.md) gives an example of how to download and install programs as well as how to use singularities and programs that are already installed on Klone as modules. The github page [HowToUseSingularities](https://github.com/merlab-uw/Klone/blob/main/HowToUseSingularities.md) gives more information on how to use singularities to run programs on Klone. 
+The [tutorial by Nam](https://github.com/merlab-uw/Klone/blob/main/Using_Klone_tutorial_by_Nam_Pho.md) gives an example of how to download and install programs as well as how to use singularities and programs that are already installed on Klone as modules. The github page [HowToUseSingularities](https://github.com/merlab-uw/Klone/blob/main/HowToUseSingularities.md) gives more information on how to use singularities to run programs on Klone. 
 
 ### Using the miniconda programs that are already installed on Klone
 We have already installed some programs on Klone using miniconda3, and others are installed as environments. Here is a list of the conda enviroments that are available (as of Sep 2021).
