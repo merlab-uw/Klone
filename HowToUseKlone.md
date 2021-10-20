@@ -247,3 +247,32 @@ If you want to try to run on the ckpt partition, use this command to see how man
 ```bash
 sinfo -p ckpt -O partition,nodehost,CPUsState,freemem,memory
 ```
+
+## If you're having trouble logging in from a linux system, and are getting this error message: 
+
+```bash 
+(base) ctarpey@DESKTOP-CG1JP0S:~$ ssh ctarpey@klone.hyak.uw.edu
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:PJYfWf/bLIye5DT1f0MBBHabDGqeH60si5gDIp5KD74.
+Please contact your system administrator.
+Add correct host key in /home/ctarpey/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /home/ctarpey/.ssh/known_hosts:4
+  remove with:
+  ssh-keygen -f "/home/ctarpey/.ssh/known_hosts" -R "klone.hyak.uw.edu"
+ECDSA host key for klone.hyak.uw.edu has changed and you have requested strict checking.
+Host key verification failed.
+
+
+```
+
+use the following command 
+```bash
+ssh-keygen -R klone.hyak.uw.edu
+```
