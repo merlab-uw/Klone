@@ -9,7 +9,7 @@ The Merlab has purchased dedicated space on the UW's Lolo Archive, a long term s
 
 ## Lolo capacity
 
-Lolo is designed for large files, it does not handle small files well. To store smaller files on lolo, combine them with other smaller files and combine them into a tar file or zip them together. To keep lolo efficient, there is a quota to the number of files that can be stored on the service; each 1TB of space on lolo allows 1,000 files. 
+Lolo is designed for large files, it does not handle small files well. To store smaller files on lolo, group them with other smaller files and combine them into a tar file or zip them together. To keep lolo efficient, there is a quota to the number of files that can be stored on the service; each 1TB of space on lolo allows 1,000 files. 
 
 Space in the archive is purchased in 1TB chunks and billed monthly to the lab group's cost center. We have 9TB of space (current May 2021) and we can easily increase our limit through a request to UW-IT. Of that 9TB, the Naish lab has 6TB of space and the Hauser lab has 3TB. 
 
