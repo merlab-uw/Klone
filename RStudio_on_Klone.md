@@ -30,7 +30,11 @@ apptainer pull docker://rocker/rstudio:4.1.3
 
 ## Get the .job file
 
-Again, Sam has a copy of rstudio-server.job in his merlab folder. There is also a copy in the merlab Klone directory here(), or you can get the original from [here](https://gist.github.com/mwanek/f9006b864569264474bb3f4985a6c5b4)
+Again, Sam has a copy of rstudio-server.job in his merlab folder. There is also a copy in the merlab Klone directory [here](https://github.com/merlab-uw/Klone/blob/main/rstudio-server.job), or you can get the original from [here](https://gist.github.com/mwanek/f9006b864569264474bb3f4985a6c5b4)
+
+You can also pull it directly onto the cluster using wget:
+
+`wget https://github.com/merlab-uw/Klone/blob/951584b056bc05f943dedef983f5cb283a1d8aef/rstudio-server.job`
 
 ##Modify the .job file
 
